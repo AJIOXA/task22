@@ -1,0 +1,14 @@
+route:
+  receiver: 'mail'
+  repeat_interval: 4h
+  group_by: [ alertname ]
+
+
+receivers:
+  - name: 'mail'
+    email_configs:
+      - smarthost: 'smtp://dolgolevets65@gmail.com@smtp.gmail.com:587'
+        auth_username: 'dolgolevets65@gmail.com'
+        auth_password: "ryouekorududwsia"
+        from: 'dolgolevets65@gmail.com'
+        to: 'dolgolevets65@gmail.com'
