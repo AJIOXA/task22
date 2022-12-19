@@ -1,14 +1,16 @@
-route:
-  receiver: 'mail'
-  repeat_interval: 4h
-  group_by: [ alertname ]
+global:
+    resolve_timeout: 1m
 
+   route:
+    receiver: 'gmail-notifications'
 
-receivers:
-  - name: 'mail'
+   receivers:
+   - name: 'gmail-notifications'
     email_configs:
-      - smarthost: 'smtp://dolgolevets65@gmail.com@smtp.gmail.com:587'
-        auth_username: 'dolgolevets65@gmail.com'
-        auth_password: "ryouekorududwsia"
-        from: 'dolgolevets65@gmail.com'
-        to: 'dolgolevets65@gmail.com'
+    - to: dolgolevets65@gmail.com
+      from: dolgolevets65@gmail.com
+      smarthost: smtp.gmail.com:587
+      auth_username: dolgolevets65@gmail.com
+      auth_identity: dolgolevets65@gmail.com
+      auth_password: eaedkydrwjaxgmwp
+      send_resolved: true

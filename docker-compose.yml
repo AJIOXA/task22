@@ -29,9 +29,9 @@ services:
     ports:
       - 9093:9093
     volumes:
-      - "./alertmanager:/config"
+      - ./alertmanager:/etc/alertmanager
       - alertmanager-data:/data
-    command: --config.file=/config/alertmanager.yml --log.level=debug --storage.path=/alertmanager
+    command: --config.file=/etc/alertmanager/alertmanager.yml --storage.path=/alertmanager
 
   node-exporter:
     image: prom/node-exporter

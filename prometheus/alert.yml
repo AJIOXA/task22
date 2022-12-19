@@ -1,15 +1,11 @@
 groups:
   - name: DemoAlerts
     rules:
-      - alert: CPU-overload
-        expr: sum by (cpu)(node_cpu_seconds_total{mode!="idle"}) < 50
-        for: 1m
-
       - alert: high_load
-        expr: node_load1 > 0.8
+        expr: node_load1 > 0.5
         for: 30s
         labels:
-          severity: page
+          severity: 'warning'
         annotations:
           summary: "Instance {{ $labels.instance }} under high load"
           description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
