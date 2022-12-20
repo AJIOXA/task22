@@ -10,7 +10,7 @@ groups:
           summary: "Instance {{ $labels.instance }} under high load"
           description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
       - alert: high_ram_load_server
-        expr: avg_over_time(node_memory_MemFree_bytes{job="noderam"}[5s])/node_memory_MemTotal_bytes{job="noderam"} * 100 < 40 #(node_load1 {job="noderam"}) > 0.5
+        expr: avg_over_time(node_memory_MemFree_bytes{job="noderam"}[5s])/node_memory_MemTotal_bytes{job="noderam"} * 100 > 40 #(node_load1 {job="noderam"}) > 0.5
         for: 1m
         labels:
           severity: 'warning'
