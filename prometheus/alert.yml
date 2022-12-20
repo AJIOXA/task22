@@ -1,9 +1,17 @@
 groups:
   - name: DemoAlerts
     rules:
-      - alert: high_load
-        expr: node_load1 > 0.5
-        for: 30s
+      - alert: high_cpu_load_host
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", job="node"}[2m])) * 100) > 80 #(node_load1 {job="node"}) > 0.5 #100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle", job="noderam"}[2m])) * 100) > 80 #(node_load1 {job="noderam"}) > 0.5
+        for: 1m
+        labels:
+          severity: 'warning'
+        annotations:
+          summary: "Instance {{ $labels.instance }} under high load"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
+      - alert: high_ram_load_server
+        expr: avg_over_time(node_memory_MemFree_bytes{job="noderam"}[5s])/node_memory_MemTotal_bytes{job="noderam"} * 100 < 40 #(node_load1 {job="noderam"}) > 0.5
+        for: 1m
         labels:
           severity: 'warning'
         annotations:
