@@ -38,6 +38,7 @@ services:
     user: root
     volumes:
       - /var/log/nginx:/var/log/nginx
+      - /var/log/apache2:/var/log/apache2
       - ./promtail/promtail-local-config.yaml:/etc/config/promtail-local-config.yaml
     entrypoint:
       - /usr/bin/promtail

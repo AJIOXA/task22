@@ -16,3 +16,11 @@ scrape_configs:
     labels:
       job: nginx
       __path__: /var/log/nginx/*log
+
+- job_name: apache2
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: apache2
+      __path__: /var/log/apache2/*log
